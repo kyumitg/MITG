@@ -1,0 +1,36 @@
+#GAN을 이용한 이미지 생성하기.
+import tensorflow as tf
+import numpy as np
+import matplotlib.pyplot as plt
+from PIL import Image
+import os
+import cv2
+
+folder_dir = './Data_Set/'
+folder_list = os.listdir(folder_dir)
+folder_list.sort()
+folder_list = folder_list[:-1]
+print(folder_list)
+
+image_list=[]
+for folder_name in folder_list:
+    folder_1 = folder_dir+folder_name
+    file_list = os.listdir(folder_1)
+    #print(file_list)   
+
+    image_lis=[]
+    for img_name in file_list:
+        image_name = folder_dir+folder_name+'/'+img_name
+        image_veiw = cv2.imread(image_name)
+        
+        image_lis.append(image_veiw)
+        #plt.rcParams["figure.figsize"] = (30,20)
+        plt.xticks([]), plt.yticks([])
+        plt.imshow(image_veiw)
+        plt.show()
+        
+    image_list.append(image_lis)
+    
+image_list = np.array(image_list)
+print(image_list.shape)
+
